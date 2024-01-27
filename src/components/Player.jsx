@@ -1,26 +1,35 @@
 import { useState } from "react";
 
-function Player({ initialName, symbol }) {
+function Player({ initialName, symbol, isActive }) {
   // created another state for the input...
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
-//   handles players clicks on 'edits' && 'saves'.
+  //   handles players clicks on 'edits' && 'saves'.
   function handleEdit() {
     // updates state based on previous state...
     setIsEditing((prevState) => !prevState);
   }
 
-//   onChange of playerNames - triggers function below
-function handleChange(e) {
+  //   onChange of playerNames - triggers function below
+  function handleChange(e) {
     setPlayerName(e.target.value);
-}
+  }
 
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         <span className="player-name">
-          {!isEditing ? playerName : <input type="text" required value={playerName} onChange={handleChange} />}
+          {!isEditing ? (
+            playerName
+          ) : (
+            <input
+              type="text"
+              required
+              value={playerName}
+              onChange={handleChange}
+            />
+          )}
         </span>
         <span className="player-symbol">{symbol}</span>
       </span>
