@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Player({ initialName, symbol, isActive }) {
+function Player({ initialName, symbol, isActive, onChangeName }) {
   // created another state for the input...
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
@@ -9,6 +9,9 @@ function Player({ initialName, symbol, isActive }) {
   function handleEdit() {
     // updates state based on previous state...
     setIsEditing((prevState) => !prevState);
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   //   onChange of playerNames - triggers function below
